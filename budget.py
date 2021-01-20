@@ -12,8 +12,7 @@ class Category:
     def withdraw(self, amount, description=""):
         # check to see if funds are avail, if yes, then append to ledger as negative int, if no, return false
         # fix needed; instead of doing its own check balance return true/false, it needs to use the check_funds() to do that
-        balance = self.get_balance()
-        if (balance - amount) < 0:
+        if self.check_funds(amount) is False:
             return False
         else:
             amount = amount * -1
@@ -28,9 +27,9 @@ class Category:
         return balance
 
     def transfer(self, amount, category):
-        # NOTE THIS NEEDS TO USE THE check_funds METHOD
+        # NOTE THIS NEEDS TO USE THE check_funds METHOD # maybe this will satisfy the requirement b/c transfers calls on withdraw() which calls on check_funds()?
         self.withdraw(amount, f"Transfer to {category.category_name}") # i think this may satisfy the use check_funds method for this method
-        category.deposit(amount, f"Transfer from {self.category_name}") # i have no idea if this works like this or not, just kinda guessing
+        category.deposit(amount, f"Transfer from {self.category_name}") 
 
     def check_funds(self, amount):
         balance = self.get_balance()
@@ -44,22 +43,25 @@ class Category:
         # first, format the header
         category_length = len(self.category_name)
         stars_needed = 30 - category_length
-        ledger = ("*" * int((stars_needed / 2)))
-        ledger = ledger + self.category_name
-        ledger = ledger + ("*" * int((stars_needed / 2)))
-        ledger = ledger.rstrip()
+        ledger_output = ("*" * int((stars_needed / 2)))
+        ledger_output = ledger_output + self.category_name
+        ledger_output = ledger_output + ("*" * int((stars_needed / 2)))
+        ledger_output = ledger_output.rstrip()
 
         # then, format the entries
         for i in self.ledger:
-            description = i["description"]
+            # need to make sure the output for amts has .00 at end if amt is round
+            # also need to provide total balance at the end of it
+            description = i["description"][0:23]
             amount = i["amount"]
             description_length = len(description)
-            amount_lengh = len(str(amount))
+            amount_lengh = len(str(float(amount)))
             transaction = description + (" " * (30 - description_length - amount_lengh)) #total length of the line is 30 chars, w/ up to seven dedicated to the amt
-            transaction = transaction + str(amount)
+            transaction = transaction + str(float(amount))
             transaction = transaction.rstrip()
-            ledger = ledger + "\n" + transaction
-            ledger = ledger.rstrip()
+            ledger_output = ledger_output + "\n" + transaction
+            ledger_output = ledger_output.rstrip()
+        return ledger_output
             
 
 

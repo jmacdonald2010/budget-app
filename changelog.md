@@ -1,3 +1,6 @@
+1/20/2021 09:40
+using check_funds() where i should be now; working on the ledger output, need to calculate total balances, also need to deal w/ making whole numbers appear w/ .00; committing before going into work
+
 1/20/2021 08:56
 Messed up something; need to use the check_funds() method per the project req's. Going to change to doing that. Committing these changes as it seems like things work so far? code underneath the class is from the project's main.py file for testing, and I'm using it for the ease of debugging.
 
