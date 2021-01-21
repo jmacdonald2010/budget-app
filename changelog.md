@@ -1,3 +1,6 @@
+1/20/2021 22:30
+Worked on the spend chart more. Need to add the parts where it adds the descending category names, then I will work on the process of filling the chart. Has not been tested w/ the assignment's test script on repl.it yet, so results may vary and I may still have a long way to go.
+
 1/20/2021 09:40
 using check_funds() where i should be now; working on the ledger output, need to calculate total balances, also need to deal w/ making whole numbers appear w/ .00; committing before going into work
 
@@ -9,3 +12,14 @@ Wrote some of the class methods. Have not tested them yet, so they will likely a
 
 1/19/2021 09:45
 Created the basic outline for the class. Have not written any functions yet. Still planning.
+
+    ----------
+    
+     F  C  A  
+     o  l  u  
+     o  o  t  
+     d  t  o  
+        h     
+        i     
+        n     
+        g     

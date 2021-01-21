@@ -50,17 +50,21 @@ class Category:
 
         # then, format the entries
         for i in self.ledger:
-            # need to make sure the output for amts has .00 at end if amt is round
             # also need to provide total balance at the end of it
             description = i["description"][0:23]
             amount = i["amount"]
+            if isinstance(amount, int):
+                amount = str(amount) + ".00" # this seems to do the trick
             description_length = len(description)
-            amount_lengh = len(str(float(amount)))
+            amount_lengh = len(str(amount))
             transaction = description + (" " * (30 - description_length - amount_lengh)) #total length of the line is 30 chars, w/ up to seven dedicated to the amt
-            transaction = transaction + str(float(amount))
+            transaction = transaction + str(amount)
             transaction = transaction.rstrip()
             ledger_output = ledger_output + "\n" + transaction
             ledger_output = ledger_output.rstrip()
+        balance = self.get_balance()
+        ledger_output = ledger_output + "\n" + "Total: " + str(balance)
+        ledger_output = ledger_output.rstrip()
         return ledger_output
             
 
@@ -69,12 +73,21 @@ class Category:
 
 
 def create_spend_chart(categories):
-    # some other stuff
-    # calc how many *'s need to be used w/ the category name (top line only 30 characters)
-    # this code actually shouldn't go here
-    # this should be in the budget class, and is printed when the budget object is printed 
-    # plus more than this
-    print("coming soon")
+    # need to calc percentages to nearest 10%
+    # then need to create a graph based on that
+    # no need for *args, input is a list
+    spend_chart = "Percentage spent by category" # top line
+    for i in range(100, -10, -10):
+        # determine length of incoming #, then calc how many spaces are needed for formatting
+        spend_chart = spend_chart + "\n" + " " * (3 - len(str(i))) + str(i) + "|"
+    spend_chart = spend_chart + "\n" + " " * 4
+    categories_length = len(categories)
+    for i in range(0, categories_length):
+        spend_chart = spend_chart + "---"
+    spend_chart = spend_chart + "-"
+    spend_chart = spend_chart.rstrip()
+    # next step is to create the descending category names
+    return spend_chart
 
 # this code down here would be used in the main.py file for the assignment
 # i just placed it here so i can can more easily debug the whole class
@@ -96,4 +109,5 @@ print(food)
 print(clothing)
 
 # commenting this out until i write this function
-# print(create_spend_chart([food, clothing, auto]))
+print(create_spend_chart([food, clothing, auto]))
+#create_spend_chart(food)
