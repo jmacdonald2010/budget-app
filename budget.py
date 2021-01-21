@@ -87,6 +87,23 @@ def create_spend_chart(categories):
     spend_chart = spend_chart + "-"
     spend_chart = spend_chart.rstrip()
     # next step is to create the descending category names
+    longest_word = ""
+    for word in categories: # determine the longest word
+        for letter in word.category_name:
+            if longest_word == "":
+                longest_word = word.category_name
+            elif len(word.category_name) > len(longest_word):
+                longest_word = word.category_name # store the longest word in a variable so we can later get its length
+    # now that the individual letters have been extracted, work on formatting and reconstructing the words vertically
+    for i in range(0, len(longest_word)): # go down one line per letter in the longest word
+        spend_chart = spend_chart + "\n" + " " * 5 # make the spaces need before first letter
+        for word in categories:
+            try:
+                spend_chart = spend_chart + word.category_name[i] + "  " # for each word, add the word, plus 2 spaces afterward
+            except IndexError:
+                spend_chart = spend_chart + "   " # however, if there are no more letters to print, just add 3 spaces
+            
+
     return spend_chart
 
 # this code down here would be used in the main.py file for the assignment
