@@ -1,3 +1,6 @@
+1/22/2021 09:14
+It works! Second commit this morning to clean up the comments.
+
 1/21/2021 23:0
 Condensed the two code blocks down into one code block. Deleted prev. two code blocks. Next step is to build the bar-graph building logic.
 
