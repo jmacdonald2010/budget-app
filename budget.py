@@ -75,32 +75,21 @@ class Category:
 def create_spend_chart(categories):
     # HEIGHT OF EACH BAR SHOULD BE ROUNDED DOWN TO NEAREST 10
     # BARS SHOULD BE BASED ON WITHDRAWALS ONLY
-    # this creates a list of lists containing each category and the withdrawals in that category's respective ledger
-    # each category is its own list in the withdrawals list
+
+    # create a withdrawals list of each categories total withdrawal amt
+    # calc the total withdrawals amongst all categories    
     withdrawals = []
     total_withdrawals = 0
     for i in categories:
-        item_withdrawals = []
+        category_withdrawals = 0
         for item in i.ledger:
             amount = item.get("amount")
             if amount < 0:
-                item_withdrawals.append(amount)
-            total_withdrawals = total_withdrawals + (amount * 1)
-        withdrawals.append(item_withdrawals)
+                category_withdrawals = category_withdrawals + (amount * -1)
+                total_withdrawals = total_withdrawals + (amount * -1)
+        withdrawals.append(category_withdrawals)
 
-    # next part, calculating the number of "o"'s to place 
-    # so calc total withdrawals from all categories (done above)
-    # then calc what percent each category is
-
-    # this creates a list of the totals for each category
-    # this block can be cleaned up by combining w/ the above block
-    amounts = []
-    for i in withdrawals:
-        category_amt = 0
-        for amount in i:
-            category_amt = category_amt + (amount * -1)
-        amounts.append(category_amt)
-
+    # next step is to take the amts, calc percentages, then create the bars
 
     spend_chart = "Percentage spent by category" # top line
     for i in range(100, -10, -10):

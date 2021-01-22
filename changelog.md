@@ -1,3 +1,6 @@
+1/21/2021 23:0
+Condensed the two code blocks down into one code block. Deleted prev. two code blocks. Next step is to build the bar-graph building logic.
+
 1/21/2021 22:09 
 Making progress on the spend chart function. Figured out the math for creating the bars, just now need to simplify it as I made it unnecessarily complex. Next version should hopefully have those two code blocks reduced to one.
 
