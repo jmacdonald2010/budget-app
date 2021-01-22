@@ -73,9 +73,35 @@ class Category:
 
 
 def create_spend_chart(categories):
-    # need to calc percentages to nearest 10%
-    # then need to create a graph based on that
-    # no need for *args, input is a list
+    # HEIGHT OF EACH BAR SHOULD BE ROUNDED DOWN TO NEAREST 10
+    # BARS SHOULD BE BASED ON WITHDRAWALS ONLY
+    # this creates a list of lists containing each category and the withdrawals in that category's respective ledger
+    # each category is its own list in the withdrawals list
+    withdrawals = []
+    total_withdrawals = 0
+    for i in categories:
+        item_withdrawals = []
+        for item in i.ledger:
+            amount = item.get("amount")
+            if amount < 0:
+                item_withdrawals.append(amount)
+            total_withdrawals = total_withdrawals + (amount * 1)
+        withdrawals.append(item_withdrawals)
+
+    # next part, calculating the number of "o"'s to place 
+    # so calc total withdrawals from all categories (done above)
+    # then calc what percent each category is
+
+    # this creates a list of the totals for each category
+    # this block can be cleaned up by combining w/ the above block
+    amounts = []
+    for i in withdrawals:
+        category_amt = 0
+        for amount in i:
+            category_amt = category_amt + (amount * -1)
+        amounts.append(category_amt)
+
+
     spend_chart = "Percentage spent by category" # top line
     for i in range(100, -10, -10):
         # determine length of incoming #, then calc how many spaces are needed for formatting

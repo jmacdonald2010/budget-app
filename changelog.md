@@ -1,5 +1,8 @@
+1/21/2021 22:09 
+Making progress on the spend chart function. Figured out the math for creating the bars, just now need to simplify it as I made it unnecessarily complex. Next version should hopefully have those two code blocks reduced to one.
+
 1/21/2021 09:19
-Figured out a way to create the descending names for the categories in the chart. Have not tested it w/ up to four categories yet tho. Should work for an endless # of categores, which is not following assignment requirements. Needs tested. Need to add chart building logic to that function as well.
+Figured out a way to create the descending names for the categories in the chart. Have not tested it w/ up to four categories yet tho. Should work for an endless # of categories, which is not following assignment requirements. Needs tested. Need to add chart building logic to that function as well.
 
 1/20/2021 22:30
 Worked on the spend chart more. Need to add the parts where it adds the descending category names, then I will work on the process of filling the chart. Has not been tested w/ the assignment's test script on repl.it yet, so results may vary and I may still have a long way to go.
@@ -36,4 +39,4 @@ Percentage spent by category
         h     
         i     
         n     
-        g        
+        g     
