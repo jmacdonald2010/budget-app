@@ -73,6 +73,7 @@ class Category:
 
 
 def create_spend_chart(categories):
+    import math
     # HEIGHT OF EACH BAR SHOULD BE ROUNDED DOWN TO NEAREST 10
     # BARS SHOULD BE BASED ON WITHDRAWALS ONLY
 
@@ -90,13 +91,29 @@ def create_spend_chart(categories):
         withdrawals.append(category_withdrawals)
 
     # next step is to take the amts, calc percentages, then create the bars
+    # this will calc averages then round them down to the nearest 10
+    averages = []
+    for amount in withdrawals:
+        percent = (amount / total_withdrawals) * 10
+        percent = math.floor(percent) * 10 # not sure if i'm allowed to use libraries
+        averages.append(percent)
+    
 
     spend_chart = "Percentage spent by category" # top line
+    # this builds the y-axis, and will also fill in the 'o''s 
+    categories_length = len(categories)
     for i in range(100, -10, -10):
         # determine length of incoming #, then calc how many spaces are needed for formatting
         spend_chart = spend_chart + "\n" + " " * (3 - len(str(i))) + str(i) + "|"
+        # now add to the other side of the line, the actual changing chart details
+        spend_chart = spend_chart + " "
+        for x in range(0, categories_length):
+                if averages[x] >= i:
+                    spend_chart = spend_chart + "o  "
+                else:
+                    spend_chart = spend_chart + "   " # spacing here may need tweaking
+
     spend_chart = spend_chart + "\n" + " " * 4
-    categories_length = len(categories)
     for i in range(0, categories_length):
         spend_chart = spend_chart + "---"
     spend_chart = spend_chart + "-"
