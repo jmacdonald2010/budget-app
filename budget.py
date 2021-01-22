@@ -28,8 +28,11 @@ class Category:
 
     def transfer(self, amount, category):
         # NOTE THIS NEEDS TO USE THE check_funds METHOD # maybe this will satisfy the requirement b/c transfers calls on withdraw() which calls on check_funds()?
-        self.withdraw(amount, f"Transfer to {category.category_name}") # i think this may satisfy the use check_funds method for this method
-        category.deposit(amount, f"Transfer from {self.category_name}") 
+        transfer_result = False
+        if self.withdraw(amount, f"Transfer to {category.category_name}") is True: # i think this may satisfy the use check_funds method for this method
+            transfer_result = True
+        category.deposit(amount, f"Transfer from {self.category_name}")
+        return transfer_result
 
     def check_funds(self, amount):
         balance = self.get_balance()
